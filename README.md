@@ -1,0 +1,2 @@
+# isucon-cfn
+isucon過去問の環境をCloudFormationで作成するためのテンプレート

@@ -104,25 +104,6 @@ Mappings:
       AMIID: ami-0f7362c1bbc7e30ec
 
 Resources:
-  SecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupName: isucon-sg-ec2
-      GroupDescription: security group for ec2
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 80
-          ToPort: 80
-          CidrIp: 0.0.0.0/0
-        - IpProtocol: tcp
-          FromPort: 22
-          ToPort: 22
-          CidrIp: 0.0.0.0/0
-      VpcId: !ImportValue isucon-VPC
-      Tags:
-        - Key: Name
-          Value: isucon-sg
-
   EC2:
     Type: AWS::EC2::Instance
     Properties:
@@ -134,7 +115,7 @@ Resources:
           DeviceIndex: "0"
           SubnetId: !ImportValue isucon-PublicSubnet
           GroupSet:
-            - !Ref SecurityGroup
+            - !ImportValue isucon-sg
       Tags:
         - Key: Name
           Value: !Sub ${AMI}-ec2
